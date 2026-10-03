@@ -484,6 +484,21 @@ services:
     networks:
       - proxy
 
+  homarr:
+    container_name: homarr
+    image: ghcr.io/homarr-labs/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - ./homarr/appdata:/appdata
+      - ${BASE_PATH}/homarr/appdata:/appdata
+    environment:
+      - SECRET_ENCRYPTION_KEY=25cc6a2195f55630255ff45b6bc3414cda46cdae42324ae1d44492d7605e5a6a
+    ports:
+      - '7576:7576'
+    netowrks:
+      - proxy
+
   #Decluttarr - Watches radarr, sonarr, lidarr, readarr and whisparr download queues and removes downloads if they become stalled or no longer needed. 
   decluttarr:
     image: ghcr.io/manimatter/decluttarr:latest
