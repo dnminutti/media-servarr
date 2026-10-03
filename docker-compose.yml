@@ -472,20 +472,6 @@ services:
   #Homarr - Customizable browser's home page to interact with your homeserver's Docker containers
   homarr:
     container_name: homarr
-    image: ghcr.io/ajnart/homarr:latest
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - ${BASE_PATH}/homarr/configs:/app/data/configs
-      - ${BASE_PATH}/homarr/icons:/app/public/icons
-      - ${BASE_PATH}/homarr/data:/data
-    ports:
-      - 7575:7575
-    networks:
-      - proxy
-
-  homarr-v1:
-    container_name: homarrV1
     image: ghcr.io/homarr-labs/homarr:latest
     restart: unless-stopped
     volumes:
@@ -494,7 +480,7 @@ services:
     environment:
       - SECRET_ENCRYPTION_KEY=${HOMARR_SECRET}
     ports:
-      - '7576:7575'
+      - '7575:7575'
     networks:
       - proxy
 
